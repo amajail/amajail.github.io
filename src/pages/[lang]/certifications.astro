@@ -14,22 +14,25 @@ interface Cert {
   code: string;
   issued: string;
   renew: string | null;
-  credentialId: string | null;
+  credentialId: string;
+  verifyUrl: string;
   noExpiry?: boolean;
 }
 
+const BASE = 'https://learn.microsoft.com/en-us/users/adriangustavomajail-2382/credentials/certification';
+
 const certs: Record<Lang, Cert[]> = {
   en: [
-    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dec 2023', renew: 'Dec 2026', credentialId: '75ADDB90F094CD39' },
-    { name: 'Azure Developer Associate', code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: null },
-    { name: 'Azure Administrator Associate', code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: null },
-    { name: 'Azure AI Fundamentals', code: 'AI-900', issued: 'Jan 2025', renew: null, credentialId: '65ACE18EEF332F7C', noExpiry: true },
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dec 2023', renew: 'Dec 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${BASE}.az-305` },
+    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${BASE}.az-204` },
+    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${BASE}.az-104` },
+    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Jan 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${BASE}.ai-900`, noExpiry: true },
   ],
   es: [
-    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dic 2023', renew: 'Dic 2026', credentialId: '75ADDB90F094CD39' },
-    { name: 'Azure Developer Associate', code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: null },
-    { name: 'Azure Administrator Associate', code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: null },
-    { name: 'Azure AI Fundamentals', code: 'AI-900', issued: 'Ene 2025', renew: null, credentialId: '65ACE18EEF332F7C', noExpiry: true },
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dic 2023', renew: 'Dic 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${BASE}.az-305` },
+    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${BASE}.az-204` },
+    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${BASE}.az-104` },
+    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Ene 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${BASE}.ai-900`, noExpiry: true },
   ],
 };
 
@@ -102,7 +105,7 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
             <h2 class="mb-3 text-sm font-semibold text-text-primary leading-snug">{cert.name}</h2>
 
             <!-- Meta -->
-            <dl class="space-y-1 font-mono text-xs text-muted">
+            <dl class="space-y-1 font-mono text-xs text-muted mb-4">
               <div class="flex items-center gap-2">
                 <dt class="text-border">{issuedLabel[lang]}:</dt>
                 <dd>{cert.issued}</dd>
@@ -113,13 +116,24 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
                   <dd class="text-accent-2">{cert.renew}</dd>
                 </div>
               )}
-              {cert.credentialId && cert.credentialId !== '—' && (
-                <div class="flex items-center gap-2 pt-1">
-                  <dt class="text-border">ID:</dt>
-                  <dd class="text-muted/70">{cert.credentialId}</dd>
-                </div>
-              )}
+              <div class="flex items-center gap-2 pt-1">
+                <dt class="text-border">ID:</dt>
+                <dd class="text-muted/70 select-all">{cert.credentialId}</dd>
+              </div>
             </dl>
+
+            <!-- Verify link -->
+            <a
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline"
+            >
+              {lang === 'en' ? 'Verify credential' : 'Verificar credencial'}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
           </div>
         ))}
       </div>
@@ -141,7 +155,7 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
         </div>
         <div class="border-t border-border pt-4 text-center">
           <a
-            href="https://learn.microsoft.com/en-us/users/amajail"
+            href="https://learn.microsoft.com/en-us/users/adriangustavomajail-2382/"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 font-mono text-xs text-accent-2 hover:underline"
