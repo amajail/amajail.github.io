@@ -19,20 +19,20 @@ interface Cert {
   noExpiry?: boolean;
 }
 
-const BASE = 'https://learn.microsoft.com/en-us/users/adriangustavomajail-2382/credentials/certification';
+const SHARE = 'https://learn.microsoft.com/api/credentials/share/en-us/AdrianGustavoMajail-2382';
 
 const certs: Record<Lang, Cert[]> = {
   en: [
-    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dec 2023', renew: 'Dec 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${BASE}.az-305` },
-    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${BASE}.az-204` },
-    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${BASE}.az-104` },
-    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Jan 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${BASE}.ai-900`, noExpiry: true },
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dec 2023', renew: 'Dec 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${SHARE}/75ADDB90F094CD39?sharingId=89501934FF3B930B` },
+    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${SHARE}/EDD7BD443196A72F?sharingId=89501934FF3B930B` },
+    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${SHARE}/BCEA09FDB40FA35F?sharingId=89501934FF3B930B` },
+    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Jan 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${SHARE}/65ACE18EEF332F7C?sharingId=89501934FF3B930B`, noExpiry: true },
   ],
   es: [
-    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dic 2023', renew: 'Dic 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${BASE}.az-305` },
-    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${BASE}.az-204` },
-    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${BASE}.az-104` },
-    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Ene 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${BASE}.ai-900`, noExpiry: true },
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dic 2023', renew: 'Dic 2026', credentialId: '75ADDB90F094CD39', verifyUrl: `${SHARE}/75ADDB90F094CD39?sharingId=89501934FF3B930B` },
+    { name: 'Azure Developer Associate',        code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: 'EDD7BD443196A72F', verifyUrl: `${SHARE}/EDD7BD443196A72F?sharingId=89501934FF3B930B` },
+    { name: 'Azure Administrator Associate',    code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: 'BCEA09FDB40FA35F', verifyUrl: `${SHARE}/BCEA09FDB40FA35F?sharingId=89501934FF3B930B` },
+    { name: 'Azure AI Fundamentals',            code: 'AI-900', issued: 'Ene 2025', renew: null,       credentialId: '65ACE18EEF332F7C', verifyUrl: `${SHARE}/65ACE18EEF332F7C?sharingId=89501934FF3B930B`, noExpiry: true },
   ],
 };
 
