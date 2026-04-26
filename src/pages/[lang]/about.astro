@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { t } from '../../i18n/ui';
 import type { Lang } from '../../i18n/ui';
 
 export function getStaticPaths() {
@@ -13,12 +12,11 @@ const content = {
   en: {
     pageTitle: 'About me',
     metaDesc: '.NET Tech Lead and AI Builder with 20 years of experience. Specialized in cloud-native systems, AI agents, and team leadership.',
-    intro: 'about',
     bio: [
       "I'm a .NET Tech Lead and AI Builder with 20 years of experience in software development. I've worked across the full stack — from on-prem enterprise systems to cloud-native microservices and, more recently, AI agent platforms. My focus is on shipping things that matter: well-architected, production-grade systems that teams can maintain and evolve.",
       "I lead by doing. I'm most effective in cross-functional environments where technical decisions meet business outcomes — working with developers, QA, BAs, and clients across LATAM, India, and North America. I care about code quality, team growth, and leaving codebases better than I found them.",
     ],
-    skillsLabel: '// core stack',
+    skillsLabel: 'Core stack',
     exploringLabel: 'Currently exploring',
     exploring: [
       'AI-200 — Azure AI Cloud Developer Associate',
@@ -33,22 +31,21 @@ const content = {
     ],
     valuesLabel: 'Values',
     values: [
-      { icon: '▸', text: 'Ship with quality' },
-      { icon: '▸', text: 'Lead by example' },
-      { icon: '▸', text: 'Always be learning' },
-      { icon: '▸', text: 'Take care of the team' },
-      { icon: '▸', text: 'Keep it simple' },
+      'Ship with quality',
+      'Lead by example',
+      'Always be learning',
+      'Take care of the team',
+      'Keep it simple',
     ],
   },
   es: {
     pageTitle: 'Sobre mí',
     metaDesc: '.NET Tech Lead y AI Builder con 20 años de experiencia. Especializado en sistemas cloud-native, agentes de IA y liderazgo de equipos.',
-    intro: 'sobre_mí',
     bio: [
       'Soy un .NET Tech Lead y AI Builder con 20 años de experiencia en desarrollo de software. Trabajé en todo el stack — desde sistemas enterprise on-prem hasta microservicios cloud-native y, más recientemente, plataformas de agentes de IA. Mi foco es en entregar cosas que importan: sistemas bien arquitectados, production-grade, que los equipos puedan mantener y evolucionar.',
       'Lidero haciendo. Soy más efectivo en entornos cross-funcionales donde las decisiones técnicas se conectan con los resultados de negocio — trabajando con desarrolladores, QA, BAs y clientes en LATAM, India y Norteamérica. Me importa la calidad del código, el crecimiento del equipo, y dejar las bases de código mejor de como las encontré.',
     ],
-    skillsLabel: '// stack principal',
+    skillsLabel: 'Stack principal',
     exploringLabel: 'Explorando actualmente',
     exploring: [
       'AI-200 — Azure AI Cloud Developer Associate',
@@ -63,11 +60,11 @@ const content = {
     ],
     valuesLabel: 'Valores',
     values: [
-      { icon: '▸', text: 'Entregar con calidad' },
-      { icon: '▸', text: 'Liderar con el ejemplo' },
-      { icon: '▸', text: 'Aprender siempre' },
-      { icon: '▸', text: 'Cuidar al equipo' },
-      { icon: '▸', text: 'Mantenerlo simple' },
+      'Entregar con calidad',
+      'Liderar con el ejemplo',
+      'Aprender siempre',
+      'Cuidar al equipo',
+      'Mantenerlo simple',
     ],
   },
 } as const;
@@ -86,29 +83,24 @@ const skills = [
 <BaseLayout lang={lang} title={`${p.pageTitle} — Adrian Majail`} description={p.metaDesc} currentPage="about">
   <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
 
-    <!-- Page heading -->
     <header class="mb-12">
-      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-        <span class="text-muted">{'>'}</span> {p.intro}
-      </p>
-      <h1 class="text-3xl font-bold text-text-primary sm:text-4xl">{p.pageTitle}</h1>
+      <p class="eyebrow mb-1">{lang === 'en' ? 'About' : 'Sobre mí'}</p>
+      <span class="accent-line"></span>
+      <h1 class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">{p.pageTitle}</h1>
     </header>
 
-    <!-- Bio + Skills grid -->
-    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 mb-16">
-      <!-- Bio -->
+    <!-- Bio + Skills -->
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 mb-14">
       <div class="space-y-5">
         {p.bio.map((para) => (
           <p class="text-muted leading-relaxed">{para}</p>
         ))}
       </div>
-
-      <!-- Skills -->
       <div>
-        <p class="mb-4 font-mono text-xs text-muted">{p.skillsLabel}</p>
+        <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-4">{p.skillsLabel}</p>
         <div class="flex flex-wrap gap-2">
           {skills.map((skill) => (
-            <span class="rounded border border-border bg-surface px-2.5 py-1 font-mono text-xs text-muted hover:border-accent hover:text-accent transition-colors cursor-default">
+            <span class="rounded-md border border-border bg-surface px-2.5 py-1 text-xs font-medium text-muted hover:border-accent hover:text-accent transition-colors cursor-default shadow-sm">
               {skill}
             </span>
           ))}
@@ -117,46 +109,40 @@ const skills = [
     </div>
 
     <!-- Currently exploring -->
-    <section class="mb-16 rounded-lg border border-border bg-surface p-6 md:p-8">
-      <p class="mb-4 font-mono text-xs text-accent uppercase tracking-widest">
-        <span class="text-muted">{'>'}</span> {p.exploringLabel.toLowerCase().replace(/ /g, '_')}
-      </p>
-      <h2 class="mb-4 text-lg font-semibold text-text-primary">{p.exploringLabel}</h2>
-      <ul class="space-y-2">
+    <section class="mb-14 rounded-xl border border-border bg-surface shadow-card p-6 md:p-8">
+      <p class="eyebrow mb-1">{p.exploringLabel}</p>
+      <span class="accent-line"></span>
+      <h2 class="text-lg font-bold text-text-primary mb-5">{p.exploringLabel}</h2>
+      <ul class="space-y-3">
         {p.exploring.map((item) => (
-          <li class="flex items-start gap-2 font-mono text-sm text-muted">
-            <span class="text-accent-2 shrink-0 mt-0.5">→</span>
+          <li class="flex items-start gap-3 text-sm text-muted">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent-2 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
             {item}
           </li>
         ))}
       </ul>
     </section>
 
-    <!-- Personal + Values grid -->
+    <!-- Personal + Values -->
     <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-      <!-- Personal -->
       <div>
-        <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-          <span class="text-muted">{'>'}</span> {p.personalLabel.toLowerCase().replace(/ /g, '_')}
-        </p>
-        <h2 class="mb-5 text-xl font-semibold text-text-primary">{p.personalLabel}</h2>
+        <p class="eyebrow mb-1">{p.personalLabel}</p>
+        <span class="accent-line"></span>
+        <h2 class="text-xl font-bold text-text-primary mb-5">{p.personalLabel}</h2>
         <div class="space-y-4">
           {p.personal.map((para) => (
             <p class="text-muted leading-relaxed">{para}</p>
           ))}
         </div>
       </div>
-
-      <!-- Values -->
       <div>
-        <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-          <span class="text-muted">{'>'}</span> {p.valuesLabel.toLowerCase()}
-        </p>
-        <h2 class="mb-5 text-xl font-semibold text-text-primary">{p.valuesLabel}</h2>
-        <ul class="space-y-3">
-          {p.values.map(({ icon, text }) => (
-            <li class="flex items-center gap-3 rounded border border-border bg-surface px-4 py-3 font-mono text-sm text-text-primary">
-              <span class="text-accent">{icon}</span>
+        <p class="eyebrow mb-1">{p.valuesLabel}</p>
+        <span class="accent-line"></span>
+        <h2 class="text-xl font-bold text-text-primary mb-5">{p.valuesLabel}</h2>
+        <ul class="space-y-2.5">
+          {p.values.map((text) => (
+            <li class="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 text-sm font-medium text-text-primary shadow-sm hover:border-accent transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               {text}
             </li>
           ))}

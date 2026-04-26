@@ -1,0 +1,213 @@
+---
+// Prototype A — "Navy Executive": dark navy, electric blue, no terminal elements
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype A — Navy Executive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #071020;
+      --surface:  #0d1f3c;
+      --surface2: #122548;
+      --accent:   #2563eb;
+      --accent-h: #1d4ed8;
+      --accent2:  #60a5fa;
+      --text:     #f0f4ff;
+      --muted:    #8da0bc;
+      --border:   #1e3a5f;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Switcher banner */
+    .switcher { background: #0a0a0a; border-bottom: 1px solid #222; padding: 8px 24px; display: flex; align-items: center; gap: 16px; font-size: 11px; font-family: monospace; }
+    .switcher span { color: #666; }
+    .switcher a { color: #888; padding: 3px 10px; border: 1px solid #333; border-radius: 4px; transition: all .2s; }
+    .switcher a:hover { border-color: #555; color: #ccc; }
+    .switcher a.current { color: #2563eb; border-color: #2563eb; }
+
+    /* Nav */
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(7,16,32,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .nav-cta:hover { background: var(--accent-h); }
+
+    /* Hero */
+    .hero { max-width: 1100px; margin: 0 auto; padding: 80px 24px 60px; display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 20px; }
+    .hero-h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; color: var(--text); margin-bottom: 20px; }
+    .hero-h1 em { font-style: normal; color: var(--accent2); }
+    .hero-sub { font-size: 17px; font-weight: 500; color: var(--accent2); margin-bottom: 16px; line-height: 1.5; }
+    .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 36px; max-width: 520px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; transition: background .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(37,99,235,.3); }
+    .btn-primary:hover { background: var(--accent-h); box-shadow: 0 6px 32px rgba(37,99,235,.4); }
+    .btn-secondary { border: 1.5px solid var(--border); color: var(--muted); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: all .2s; }
+    .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+    .hero-socials { display: flex; gap: 20px; }
+    .hero-socials a { color: var(--muted); font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .hero-socials a:hover { color: var(--accent2); }
+
+    /* Profile card */
+    .profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; overflow: hidden; }
+    .profile-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--surface2); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--accent2); flex-shrink: 0; }
+    .profile-name { font-size: 16px; font-weight: 700; color: var(--text); }
+    .profile-title { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .stat { text-align: center; background: var(--surface2); border-radius: 10px; padding: 14px; }
+    .stat-value { font-size: 24px; font-weight: 800; color: var(--accent2); letter-spacing: -1px; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .profile-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag { background: rgba(37,99,235,.12); border: 1px solid rgba(37,99,235,.25); color: var(--accent2); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 4px; }
+
+    /* Stats strip */
+    .stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .stats-inner { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 24px; }
+    .strip-value { font-size: 28px; font-weight: 800; color: var(--accent2); letter-spacing: -1px; }
+    .strip-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+
+    /* Sample section */
+    .section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+    .section-title { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+    .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color .2s; }
+    .card:hover { border-color: var(--accent); }
+    .card-label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+    .card-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .featured-card { border-color: rgba(37,99,235,.4); background: linear-gradient(135deg, var(--surface) 0%, rgba(37,99,235,.05) 100%); }
+    .featured-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-bottom: 10px; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .profile-card { display: none; }
+      .hero-h1 { font-size: 36px; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Prototype switcher -->
+  <div class="switcher">
+    <span>Prototype:</span>
+    <a href="/preview/a" class="current">A — Navy Executive</a>
+    <a href="/preview/b">B — Light Leadership</a>
+    <a href="/preview/c">C — Dark Premium</a>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Adrian <span>Majail</span></div>
+      <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">Experience</a>
+        <a href="#">Projects</a>
+        <a href="#">Certifications</a>
+        <a href="#" class="nav-cta">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <p class="hero-eyebrow">Tech Lead · AI Builder · Azure Architect</p>
+      <h1 class="hero-h1">I build teams and <em>AI systems</em> that ship.</h1>
+      <p class="hero-sub">.NET Tech Lead & AI Builder — 20 years turning complex problems into working software.</p>
+      <p class="hero-desc">Based in Córdoba, Argentina. Currently leading AI agent platforms at CloudX — building RAG pipelines, MCP integrations, and distributed systems for enterprise clients.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">See my work →</a>
+        <a href="#" class="btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="#">⬡ GitHub</a>
+        <a href="#">in LinkedIn</a>
+        <a href="#">✉ Email</a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar">AM</div>
+        <div>
+          <div class="profile-name">Adrian Majail</div>
+          <div class="profile-title">Dev Team Lead @ CloudX · Córdoba, Argentina</div>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="stat"><div class="stat-value">20+</div><div class="stat-label">Years exp.</div></div>
+        <div class="stat"><div class="stat-value">3</div><div class="stat-label">Big Four</div></div>
+        <div class="stat"><div class="stat-value">10+</div><div class="stat-label">Countries</div></div>
+        <div class="stat"><div class="stat-value">4</div><div class="stat-label">Azure certs</div></div>
+      </div>
+      <div class="profile-skills">
+        <span class="skill-tag">.NET / C#</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">AI Agents</span>
+        <span class="skill-tag">RAG</span>
+        <span class="skill-tag">MCP</span>
+        <span class="skill-tag">Team Lead</span>
+        <span class="skill-tag">DevOps</span>
+        <span class="skill-tag">Terraform</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div><div class="strip-value">20+</div><div class="strip-label">Years of experience</div></div>
+      <div><div class="strip-value">5+</div><div class="strip-label">Companies</div></div>
+      <div><div class="strip-value">10+</div><div class="strip-label">Countries (teams)</div></div>
+      <div><div class="strip-value">3</div><div class="strip-label">Big Four projects</div></div>
+    </div>
+  </div>
+
+  <!-- Sample projects section -->
+  <section class="section">
+    <p class="section-eyebrow">Featured Work</p>
+    <h2 class="section-title">Selected Projects</h2>
+    <p class="section-sub">Enterprise platforms across AI, cloud, and distributed systems.</p>
+    <div class="cards">
+      <div class="card featured-card">
+        <div class="featured-badge">Featured</div>
+        <div class="card-label">AI · 2024–2025</div>
+        <div class="card-title">Agent Management Platform</div>
+        <div class="card-body">Enterprise RAG platform for a Big Four client. MCP tools, OpenAPI plugins, SignalR, 5 cross-functional teams across 4 countries.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Enterprise · 2022–2024</div>
+        <div class="card-title">Enterprise Tax Platform</div>
+        <div class="card-body">Large-scale tax management platform. Microservices, Azure, Power BI reporting, SonarQube security hardening.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Long-term · 2009–2020</div>
+        <div class="card-title">University Enterprise Platform</div>
+        <div class="card-body">20,000+ users. Evolved from .NET monolith to Azure-hosted system with CI/CD, payment integration, Oracle PL/SQL.</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

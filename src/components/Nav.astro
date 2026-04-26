@@ -11,79 +11,43 @@ const { lang, currentPage } = Astro.props;
 const otherLang = lang === 'en' ? 'es' : 'en';
 
 const navLinks = [
-  { page: 'about', label: t(lang, 'nav.about'), href: `/${lang}/about` },
-  { page: 'experience', label: t(lang, 'nav.experience'), href: `/${lang}/experience` },
-  { page: 'projects', label: t(lang, 'nav.projects'), href: `/${lang}/projects` },
+  { page: 'about',          label: t(lang, 'nav.about'),          href: `/${lang}/about` },
+  { page: 'experience',     label: t(lang, 'nav.experience'),     href: `/${lang}/experience` },
+  { page: 'projects',       label: t(lang, 'nav.projects'),       href: `/${lang}/projects` },
   { page: 'certifications', label: t(lang, 'nav.certifications'), href: `/${lang}/certifications` },
-  { page: 'contact', label: t(lang, 'nav.contact'), href: `/${lang}/contact` },
 ];
 
-// Build the language switcher URL by replacing the lang prefix
 const currentPath = Astro.url.pathname;
 const langSwitcherHref = currentPath.replace(`/${lang}`, `/${otherLang}`);
 ---
 
-<header class="sticky top-0 z-50 border-b border-border bg-bg/90 backdrop-blur-sm">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-    <!-- Logo / site name -->
-    <a href={`/${lang}/`} class="font-mono text-sm font-semibold text-accent hover:opacity-80 transition-opacity">
-      <span class="text-muted">~/</span>amajail
+<header class="sticky top-0 z-50 bg-surface border-b border-border shadow-sm">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-0 md:px-6" style="height:64px">
+
+    <!-- Logo -->
+    <a href={`/${lang}/`} class="text-base font-bold text-text-primary hover:text-accent transition-colors tracking-tight">
+      Adrian Majail
     </a>
 
-    <!-- Mobile menu toggle -->
+    <!-- Mobile toggle -->
     <button
       id="nav-toggle"
-      class="flex md:hidden flex-col gap-1.5 p-2 text-text-primary hover:text-accent transition-colors"
+      class="flex md:hidden flex-col gap-1.5 p-2 text-muted hover:text-text-primary transition-colors"
       aria-label="Toggle menu"
       aria-expanded="false"
     >
-      <span class="block h-0.5 w-5 bg-current transition-transform" id="bar1"></span>
-      <span class="block h-0.5 w-5 bg-current transition-opacity" id="bar2"></span>
-      <span class="block h-0.5 w-5 bg-current transition-transform" id="bar3"></span>
+      <span class="block h-0.5 w-5 bg-current transition-transform duration-200" id="bar1"></span>
+      <span class="block h-0.5 w-5 bg-current transition-opacity duration-200" id="bar2"></span>
+      <span class="block h-0.5 w-5 bg-current transition-transform duration-200" id="bar3"></span>
     </button>
 
-    <!-- Nav links -->
-    <ul
-      id="nav-menu"
-      class="hidden md:flex items-center gap-6 text-sm font-medium"
-    >
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-6 text-sm">
       {navLinks.map(({ page, label, href }) => (
         <li>
           <a
             href={href}
-            class={`transition-colors hover:text-accent ${
-              currentPage === page
-                ? 'text-accent border-b border-accent pb-0.5'
-                : 'text-muted'
-            }`}
-          >
-            {label}
-          </a>
-        </li>
-      ))}
-
-      <!-- Language switcher -->
-      <li class="ml-2 flex items-center gap-1 font-mono text-xs">
-        <span class={lang === 'en' ? 'text-accent' : 'text-muted'}>EN</span>
-        <span class="text-border">|</span>
-        <a
-          href={langSwitcherHref}
-          class={lang === 'es' ? 'text-accent' : 'text-muted hover:text-text-primary transition-colors'}
-        >
-          ES
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Mobile dropdown -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-surface px-4 pb-4">
-    <ul class="flex flex-col gap-1 pt-3 text-sm">
-      {navLinks.map(({ page, label, href }) => (
-        <li>
-          <a
-            href={href}
-            class={`block rounded px-2 py-2 transition-colors hover:text-accent ${
+            class={`font-medium transition-colors hover:text-accent ${
               currentPage === page ? 'text-accent' : 'text-muted'
             }`}
           >
@@ -91,14 +55,63 @@ const langSwitcherHref = currentPath.replace(`/${lang}`, `/${otherLang}`);
           </a>
         </li>
       ))}
-      <li class="mt-2 flex items-center gap-2 px-2 font-mono text-xs">
-        <span class={lang === 'en' ? 'text-accent' : 'text-muted'}>EN</span>
-        <span class="text-border">|</span>
+
+      <!-- Lang switcher -->
+      <li class="flex items-center gap-1.5 text-xs font-semibold ml-1">
+        <span class={lang === 'en' ? 'text-text-primary' : 'text-muted'}>{lang === 'en' ? 'EN' : 'ES'}</span>
+        <span class="text-border-2">|</span>
         <a
           href={langSwitcherHref}
-          class={lang === 'es' ? 'text-accent' : 'text-muted hover:text-text-primary transition-colors'}
+          class="text-muted hover:text-text-primary transition-colors"
         >
-          ES
+          {lang === 'en' ? 'ES' : 'EN'}
+        </a>
+      </li>
+
+      <!-- CTA -->
+      <li>
+        <a
+          href={`/${lang}/contact`}
+          class={`rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
+            currentPage === 'contact'
+              ? 'bg-accent text-white'
+              : 'bg-text-primary text-white hover:bg-accent'
+          }`}
+        >
+          {t(lang, 'nav.contact')}
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Mobile dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-surface px-4 pb-5">
+    <ul class="flex flex-col gap-1 pt-4 text-sm">
+      {navLinks.map(({ page, label, href }) => (
+        <li>
+          <a
+            href={href}
+            class={`block rounded-lg px-3 py-2.5 font-medium transition-colors hover:bg-surface-2 ${
+              currentPage === page ? 'text-accent' : 'text-muted'
+            }`}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={`/${lang}/contact`}
+          class="block mt-2 rounded-lg bg-text-primary px-3 py-2.5 text-center font-semibold text-white hover:bg-accent transition-colors"
+        >
+          {t(lang, 'nav.contact')}
+        </a>
+      </li>
+      <li class="flex items-center gap-2 px-3 pt-3 text-xs font-semibold text-muted">
+        <span class="text-text-primary">{lang === 'en' ? 'EN' : 'ES'}</span>
+        <span class="text-border-2">|</span>
+        <a href={langSwitcherHref} class="hover:text-text-primary transition-colors">
+          {lang === 'en' ? 'ES' : 'EN'}
         </a>
       </li>
     </ul>
@@ -107,13 +120,13 @@ const langSwitcherHref = currentPath.replace(`/${lang}`, `/${otherLang}`);
 
 <script>
   const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const bar1 = document.getElementById('bar1');
-  const bar2 = document.getElementById('bar2');
-  const bar3 = document.getElementById('bar3');
+  const menu   = document.getElementById('mobile-menu');
+  const bar1   = document.getElementById('bar1');
+  const bar2   = document.getElementById('bar2');
+  const bar3   = document.getElementById('bar3');
 
   toggle?.addEventListener('click', () => {
-    const isOpen = menu?.classList.contains('hidden') === false;
+    const isOpen = !menu?.classList.contains('hidden');
     menu?.classList.toggle('hidden');
     toggle.setAttribute('aria-expanded', String(!isOpen));
     bar1?.classList.toggle('translate-y-2');

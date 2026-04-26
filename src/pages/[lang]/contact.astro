@@ -13,13 +13,11 @@ const content = {
   en: {
     pageTitle: 'Get in touch',
     intro: "I'm always open to interesting conversations — whether it's a project, a technical challenge, or just connecting with people in the industry.",
-    availability: t(lang, 'contact.availability'),
     statusNote: 'Currently employed full-time at CloudX.',
   },
   es: {
     pageTitle: 'Contacto',
     intro: 'Siempre estoy abierto a conversaciones interesantes — ya sea un proyecto, un desafío técnico, o simplemente conectar con gente de la industria.',
-    availability: t(lang, 'contact.availability'),
     statusNote: 'Actualmente empleado full-time en CloudX.',
   },
 };
@@ -60,36 +58,33 @@ const links = [
   description="Get in touch with Adrian Majail — open to consulting, speaking, and collaboration."
   currentPage="contact"
 >
-  <div class="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-20">
+  <div class="mx-auto max-w-2xl px-4 py-16 md:px-6 md:py-20">
 
-    <!-- Page heading -->
-    <header class="mb-12 text-center">
-      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-        <span class="text-muted">{'>'}</span> {lang === 'en' ? 'contact' : 'contacto'}
-      </p>
-      <h1 class="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">{p.pageTitle}</h1>
-      <p class="mx-auto max-w-xl text-muted leading-relaxed">{p.intro}</p>
+    <header class="mb-10 text-center">
+      <p class="eyebrow mb-1">{lang === 'en' ? 'Contact' : 'Contacto'}</p>
+      <span class="accent-line mx-auto"></span>
+      <h1 class="mb-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">{p.pageTitle}</h1>
+      <p class="text-muted leading-relaxed">{p.intro}</p>
     </header>
 
-    <!-- Availability badge -->
-    <div class="mb-10 flex justify-center">
-      <div class="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-2 font-mono text-sm text-accent">
-        <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
-        {p.availability}
+    <!-- Availability -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-blue-50 px-4 py-2 text-sm font-semibold text-accent">
+        <span class="h-2 w-2 rounded-full bg-accent-2"></span>
+        {t(lang, 'contact.availability')}
       </div>
     </div>
 
-    <!-- Contact link cards -->
-    <div class="space-y-4 mb-10">
+    <!-- Contact cards -->
+    <div class="space-y-3 mb-8">
       {links.map(({ label, value, href, description, iconPath, stroke }) => (
         <a
           href={href}
           target={href.startsWith('mailto') ? undefined : '_blank'}
           rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-          class="group flex items-center gap-5 rounded-lg border border-border bg-surface p-5 transition-all hover:border-accent/50 hover:bg-surface/80 hover:shadow-lg hover:shadow-accent/5"
+          class="group flex items-center gap-4 rounded-xl border border-border bg-surface shadow-card p-5 transition-all hover:shadow-card-hover hover:border-accent/40"
         >
-          <!-- Icon -->
-          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-bg group-hover:border-accent/40 group-hover:text-accent text-muted transition-colors">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-2 text-muted group-hover:border-accent/40 group-hover:text-accent transition-colors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
@@ -102,35 +97,19 @@ const links = [
               set:html={iconPath}
             />
           </div>
-
-          <!-- Text -->
           <div class="min-w-0 flex-1">
-            <p class="font-mono text-xs text-muted mb-0.5">{label}</p>
-            <p class="text-sm font-medium text-text-primary truncate">{value}</p>
-            <p class="mt-0.5 text-xs text-muted">{description[lang]}</p>
+            <p class="text-xs font-semibold text-muted mb-0.5">{label}</p>
+            <p class="text-sm font-semibold text-text-primary truncate">{value}</p>
+            <p class="text-xs text-muted mt-0.5">{description[lang]}</p>
           </div>
-
-          <!-- Arrow -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-muted group-hover:text-accent transition-colors shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-border-2 group-hover:text-accent transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14m-7-7 7 7-7 7"/>
           </svg>
         </a>
       ))}
     </div>
 
-    <!-- Status note -->
-    <p class="text-center font-mono text-xs text-muted">
-      {p.statusNote}
-    </p>
+    <p class="text-center text-xs text-muted">{p.statusNote}</p>
 
   </div>
 </BaseLayout>

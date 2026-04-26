@@ -22,13 +22,9 @@ interface Project {
 const projects: Record<Lang, Project[]> = {
   en: [
     {
-      title: 'Agent Management Platform',
-      client: 'Big Four (confidential) · CloudX',
-      period: '2024–2025',
-      featured: true,
-      badgeLabel: 'Featured',
-      description:
-        'An enterprise platform for managing AI agents that perform Retrieval-Augmented Generation (RAG), consuming MCP tools and OpenAPI plugins. Built to scale across multiple business units with full enterprise integration.',
+      title: 'Agent Management Platform', client: 'Big Four (confidential) · CloudX', period: '2024–2025',
+      featured: true, badgeLabel: 'Featured',
+      description: 'An enterprise platform for managing AI agents that perform Retrieval-Augmented Generation (RAG), consuming MCP tools and OpenAPI plugins. Built to scale across multiple business units with full enterprise integration.',
       highlights: [
         'RAG pipeline orchestration with MCP and OpenAPI plugin consumption',
         'Real-time agent status via SignalR',
@@ -39,11 +35,8 @@ const projects: Record<Lang, Project[]> = {
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'GitHub Actions', 'Microsoft Entra'],
     },
     {
-      title: 'Enterprise Tax Platform',
-      client: 'Big Four (confidential) · Cognizant Softvision',
-      period: '2022–2024',
-      description:
-        'A large-scale tax management platform for a global firm. Microservices architecture with full Azure integration, Power BI reporting, and security hardening via SonarQube.',
+      title: 'Enterprise Tax Platform', client: 'Big Four (confidential) · Cognizant Softvision', period: '2022–2024',
+      description: 'A large-scale tax management platform for a global firm. Microservices architecture with full Azure integration, Power BI reporting, and security hardening via SonarQube.',
       highlights: [
         'SAFe PI planning across multicultural teams',
         'Redis caching for high-performance data access',
@@ -53,11 +46,8 @@ const projects: Record<Lang, Project[]> = {
       stack: ['.NET', 'REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI', 'SonarQube'],
     },
     {
-      title: 'University Enterprise Platform',
-      client: 'UADE',
-      period: '2009–2020',
-      description:
-        'Long-running platform serving 20,000+ users. Evolved from a .NET monolith to an Azure-hosted, scalable system with CI/CD automation, payment integration, and high-concurrency handling.',
+      title: 'University Enterprise Platform', client: 'UADE', period: '2009–2020',
+      description: 'Long-running platform serving 20,000+ users. Evolved from a .NET monolith to an Azure-hosted, scalable system with CI/CD automation, payment integration, and high-concurrency handling.',
       highlights: [
         'Scaled to handle large concurrent user loads on Azure',
         'Automated CI/CD with Jenkins pipelines',
@@ -69,13 +59,9 @@ const projects: Record<Lang, Project[]> = {
   ],
   es: [
     {
-      title: 'Agent Management Platform',
-      client: 'Big Four (confidencial) · CloudX',
-      period: '2024–2025',
-      featured: true,
-      badgeLabel: 'Destacado',
-      description:
-        'Plataforma enterprise para gestión de agentes de IA que realizan Retrieval-Augmented Generation (RAG), consumiendo herramientas MCP y plugins OpenAPI. Construida para escalar en múltiples unidades de negocio con integración enterprise completa.',
+      title: 'Agent Management Platform', client: 'Big Four (confidencial) · CloudX', period: '2024–2025',
+      featured: true, badgeLabel: 'Destacado',
+      description: 'Plataforma enterprise para gestión de agentes de IA que realizan Retrieval-Augmented Generation (RAG), consumiendo herramientas MCP y plugins OpenAPI. Construida para escalar en múltiples unidades de negocio con integración enterprise completa.',
       highlights: [
         'Orquestación de pipelines RAG con MCP y plugins OpenAPI',
         'Estado de agentes en tiempo real vía SignalR',
@@ -86,11 +72,8 @@ const projects: Record<Lang, Project[]> = {
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'GitHub Actions', 'Microsoft Entra'],
     },
     {
-      title: 'Plataforma de Impuestos Enterprise',
-      client: 'Big Four (confidencial) · Cognizant Softvision',
-      period: '2022–2024',
-      description:
-        'Plataforma de gestión tributaria a gran escala para una empresa global. Arquitectura de microservicios con integración completa en Azure, reportes Power BI y hardening de seguridad con SonarQube.',
+      title: 'Plataforma de Impuestos Enterprise', client: 'Big Four (confidencial) · Cognizant Softvision', period: '2022–2024',
+      description: 'Plataforma de gestión tributaria a gran escala para una empresa global. Arquitectura de microservicios con integración completa en Azure, reportes Power BI y hardening de seguridad con SonarQube.',
       highlights: [
         'SAFe PI planning en equipos multiculturales',
         'Redis para acceso a datos de alta performance',
@@ -100,11 +83,8 @@ const projects: Record<Lang, Project[]> = {
       stack: ['.NET', 'REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI', 'SonarQube'],
     },
     {
-      title: 'Plataforma Enterprise Universitaria',
-      client: 'UADE',
-      period: '2009–2020',
-      description:
-        'Plataforma de larga duración para más de 20.000 usuarios. Evolucionó de un monolito .NET a un sistema escalable en Azure con CI/CD automatizado, integración de pagos y manejo de alta concurrencia.',
+      title: 'Plataforma Enterprise Universitaria', client: 'UADE', period: '2009–2020',
+      description: 'Plataforma de larga duración para más de 20.000 usuarios. Evolucionó de un monolito .NET a un sistema escalable en Azure con CI/CD automatizado, integración de pagos y manejo de alta concurrencia.',
       highlights: [
         'Escalado para alta concurrencia en Azure',
         'CI/CD automatizado con Jenkins',
@@ -116,9 +96,9 @@ const projects: Record<Lang, Project[]> = {
   ],
 };
 
-const pageTitle = { en: 'Projects', es: 'Proyectos' };
-const clientLabel = { en: 'Client', es: 'Cliente' };
-const highlightsLabel = { en: 'Highlights', es: 'Destacados' };
+const pageTitle   = { en: 'Projects',    es: 'Proyectos' };
+const clientLabel = { en: 'Client',      es: 'Cliente' };
+const hlLabel     = { en: 'Highlights',  es: 'Destacados' };
 ---
 
 <BaseLayout
@@ -129,64 +109,52 @@ const highlightsLabel = { en: 'Highlights', es: 'Destacados' };
 >
   <div class="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-20">
 
-    <!-- Page heading -->
     <header class="mb-12">
-      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-        <span class="text-muted">{'>'}</span> {lang === 'en' ? 'projects' : 'proyectos'}
-      </p>
-      <h1 class="text-3xl font-bold text-text-primary sm:text-4xl">{pageTitle[lang]}</h1>
+      <p class="eyebrow mb-1">{lang === 'en' ? 'Selected work' : 'Trabajo seleccionado'}</p>
+      <span class="accent-line"></span>
+      <h1 class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">{pageTitle[lang]}</h1>
     </header>
 
-    <!-- Project cards -->
-    <div class="space-y-8">
+    <div class="space-y-6">
       {projects[lang].map((project) => (
-        <article
-          class={`rounded-lg border bg-surface p-6 md:p-8 transition-colors ${
-            project.featured
-              ? 'border-accent/40 shadow-lg shadow-accent/5'
-              : 'border-border hover:border-border/60'
-          }`}
-        >
-          <!-- Card header -->
-          <div class="mb-4 flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <div class="flex flex-wrap items-center gap-2 mb-1">
-                <h2 class="text-xl font-bold text-text-primary">{project.title}</h2>
-                {project.featured && (
-                  <span class="rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 font-mono text-xs font-semibold text-accent">
-                    {project.badgeLabel}
-                  </span>
-                )}
-              </div>
-              <p class="font-mono text-xs text-muted">
-                <span class="text-accent-2">{clientLabel[lang]}:</span> {project.client} · {project.period}
-              </p>
+        <article class={`rounded-xl border bg-surface shadow-card p-6 md:p-8 transition-all hover:shadow-card-hover ${
+          project.featured ? 'border-accent/40' : 'border-border hover:border-border-2'
+        }`}>
+          {project.featured && (
+            <div class="mb-4">
+              <span class="rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white">
+                {project.badgeLabel}
+              </span>
             </div>
+          )}
+
+          <div class="mb-4">
+            <h2 class="text-xl font-bold text-text-primary mb-1">{project.title}</h2>
+            <p class="text-xs font-medium text-muted">
+              <span class="text-accent-2">{clientLabel[lang]}:</span> {project.client} · {project.period}
+            </p>
           </div>
 
-          <!-- Description -->
-          <p class="mb-6 text-sm text-muted leading-relaxed">{project.description}</p>
+          <p class="mb-5 text-sm text-muted leading-relaxed">{project.description}</p>
 
-          <!-- Highlights -->
-          <div class="mb-6">
-            <p class="mb-2 font-mono text-xs text-muted uppercase tracking-widest">{highlightsLabel[lang]}</p>
-            <ul class="space-y-1.5">
+          <div class="mb-5">
+            <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-3">{hlLabel[lang]}</p>
+            <ul class="space-y-2">
               {project.highlights.map((h) => (
-                <li class="flex items-start gap-2 text-sm text-muted">
-                  <span class="text-accent shrink-0 mt-0.5">▸</span>
+                <li class="flex items-start gap-2.5 text-sm text-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   {h}
                 </li>
               ))}
             </ul>
           </div>
 
-          <!-- Stack -->
           <div>
-            <p class="mb-2 font-mono text-xs text-muted uppercase tracking-widest">Stack</p>
+            <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-2">Stack</p>
             <div class="flex flex-wrap gap-1.5">
               {project.stack.map((tag) => (
-                <span class={`rounded border px-2 py-0.5 font-mono text-xs ${
-                  project.featured ? 'border-accent/30 text-accent/80' : 'border-border text-muted'
+                <span class={`rounded-md border px-2 py-0.5 font-mono text-xs ${
+                  project.featured ? 'border-accent/30 text-accent' : 'border-border text-muted'
                 }`}>
                   {tag}
                 </span>
@@ -197,11 +165,8 @@ const highlightsLabel = { en: 'Highlights', es: 'Destacados' };
       ))}
     </div>
 
-    <!-- Footer note -->
-    <p class="mt-10 font-mono text-xs text-muted text-center">
-      {lang === 'en'
-        ? '// More projects and open source work coming soon'
-        : '// Más proyectos y trabajo open source próximamente'}
+    <p class="mt-10 text-center text-xs text-muted">
+      {lang === 'en' ? 'More projects and open source work coming soon.' : 'Más proyectos y trabajo open source próximamente.'}
     </p>
 
   </div>

@@ -38,27 +38,27 @@ const certs: Record<Lang, Cert[]> = {
 
 const inProgress = {
   en: [
-    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate', target: 'mid 2026' },
+    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate',   target: 'mid 2026' },
     { code: 'AI-103', name: 'Azure AI App and Agent Developer Associate', target: '2026' },
   ],
   es: [
-    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate', target: 'mediados 2026' },
+    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate',   target: 'mediados 2026' },
     { code: 'AI-103', name: 'Azure AI App and Agent Developer Associate', target: '2026' },
   ],
 };
 
 const learnStats = [
-  { value: '87', label: { en: 'Badges earned', es: 'Badges obtenidos' } },
-  { value: '18', label: { en: 'Trophies', es: 'Trofeos' } },
-  { value: '10', label: { en: 'Level', es: 'Nivel' } },
+  { value: '87', label: { en: 'Badges earned',  es: 'Badges obtenidos' } },
+  { value: '18', label: { en: 'Trophies',        es: 'Trofeos' } },
+  { value: '10', label: { en: 'Level',           es: 'Nivel' } },
 ];
 
-const pageTitle = { en: 'Certifications', es: 'Certificaciones' };
-const issuedLabel = { en: 'Issued', es: 'Obtenida' };
-const targetLabel = { en: 'Target', es: 'Objetivo' };
-const noExpiryLabel = { en: 'No expiry', es: 'Sin vencimiento' };
+const pageTitle    = { en: 'Certifications',  es: 'Certificaciones' };
+const issuedLabel  = { en: 'Issued',          es: 'Obtenida' };
+const targetLabel  = { en: 'Target',          es: 'Objetivo' };
+const noExpiryLabel = { en: 'No expiry',      es: 'Sin vencimiento' };
 const msLearnLabel = { en: 'Microsoft Learn Stats', es: 'Stats en Microsoft Learn' };
-const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
+const inProgressTitle = { en: 'In Progress',  es: 'En Progreso' };
 ---
 
 <BaseLayout
@@ -69,65 +69,57 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
 >
   <div class="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-20">
 
-    <!-- Page heading -->
     <header class="mb-12">
-      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
-        <span class="text-muted">{'>'}</span> {lang === 'en' ? 'certifications' : 'certificaciones'}
-      </p>
-      <h1 class="text-3xl font-bold text-text-primary sm:text-4xl">{pageTitle[lang]}</h1>
+      <p class="eyebrow mb-1">{lang === 'en' ? 'Microsoft Azure' : 'Microsoft Azure'}</p>
+      <span class="accent-line"></span>
+      <h1 class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">{pageTitle[lang]}</h1>
     </header>
 
     <!-- Active certs grid -->
     <section class="mb-14">
-      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
-        // {t(lang, 'certifications.active')}
-      </p>
+      <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-5">{t(lang, 'certifications.active')}</p>
       <div class="grid gap-4 sm:grid-cols-2">
         {certs[lang].map((cert) => (
-          <div class="rounded-lg border border-border bg-surface p-5 hover:border-accent/40 transition-colors">
-            <!-- Code badge -->
+          <div class="rounded-xl border border-border bg-surface shadow-card p-5 hover:shadow-card-hover hover:border-border-2 transition-all">
             <div class="mb-3 flex items-start justify-between gap-2">
-              <span class="inline-block rounded border border-accent/40 bg-accent/10 px-2.5 py-1 font-mono text-sm font-bold text-accent">
+              <span class="inline-block rounded-lg border border-accent/30 bg-blue-50 px-3 py-1 font-mono text-sm font-bold text-accent">
                 {cert.code}
               </span>
               {cert.noExpiry ? (
-                <span class="rounded-full border border-accent-2/40 bg-accent-2/10 px-2 py-0.5 font-mono text-xs text-accent-2">
+                <span class="rounded-full border border-accent-2/30 bg-cyan-50 px-2.5 py-0.5 text-xs font-semibold text-accent-2">
                   {noExpiryLabel[lang]}
                 </span>
               ) : (
-                <span class="rounded-full border border-accent/30 bg-accent/5 px-2 py-0.5 font-mono text-xs text-accent">
+                <span class="rounded-full border border-accent/20 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-accent">
                   {t(lang, 'certifications.active')}
                 </span>
               )}
             </div>
 
-            <!-- Cert name -->
-            <h2 class="mb-3 text-sm font-semibold text-text-primary leading-snug">{cert.name}</h2>
+            <h2 class="mb-3 text-sm font-bold text-text-primary leading-snug">{cert.name}</h2>
 
-            <!-- Meta -->
-            <dl class="space-y-1 font-mono text-xs text-muted mb-4">
+            <dl class="space-y-1 text-xs text-muted mb-4">
               <div class="flex items-center gap-2">
-                <dt class="text-border">{issuedLabel[lang]}:</dt>
-                <dd>{cert.issued}</dd>
+                <dt class="text-border-2">{issuedLabel[lang]}:</dt>
+                <dd class="font-medium">{cert.issued}</dd>
               </div>
               {cert.renew && (
                 <div class="flex items-center gap-2">
-                  <dt class="text-border">{t(lang, 'certifications.renew')}:</dt>
-                  <dd class="text-accent-2">{cert.renew}</dd>
+                  <dt class="text-border-2">{t(lang, 'certifications.renew')}:</dt>
+                  <dd class="font-medium text-accent-2">{cert.renew}</dd>
                 </div>
               )}
-              <div class="flex items-center gap-2 pt-1">
-                <dt class="text-border">ID:</dt>
-                <dd class="text-muted/70 select-all">{cert.credentialId}</dd>
+              <div class="flex items-center gap-2">
+                <dt class="text-border-2">ID:</dt>
+                <dd class="font-mono select-all text-muted/70">{cert.credentialId}</dd>
               </div>
             </dl>
 
-            <!-- Verify link -->
             <a
               href={cert.verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:underline"
+              class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
             >
               {lang === 'en' ? 'Verify credential' : 'Verificar credencial'}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -141,15 +133,13 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
 
     <!-- MS Learn Stats -->
     <section class="mb-14">
-      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
-        // {msLearnLabel[lang]}
-      </p>
-      <div class="rounded-lg border border-border bg-surface p-6">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-5">{msLearnLabel[lang]}</p>
+      <div class="rounded-xl border border-border bg-surface shadow-card p-6">
         <div class="grid grid-cols-3 gap-6 text-center mb-5">
           {learnStats.map(({ value, label }) => (
             <div>
-              <p class="font-mono text-2xl font-bold text-accent">{value}</p>
-              <p class="mt-1 text-xs text-muted">{label[lang]}</p>
+              <p class="text-3xl font-extrabold text-text-primary tracking-tight">{value}</p>
+              <p class="mt-1 text-xs font-medium text-muted">{label[lang]}</p>
             </div>
           ))}
         </div>
@@ -158,7 +148,7 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
             href="https://learn.microsoft.com/en-us/users/adriangustavomajail-2382/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 font-mono text-xs text-accent-2 hover:underline"
+            class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
           >
             {lang === 'en' ? 'View MS Learn profile' : 'Ver perfil en MS Learn'}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -171,24 +161,22 @@ const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
 
     <!-- In Progress -->
     <section>
-      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
-        // {t(lang, 'certifications.in_progress')}
-      </p>
-      <h2 class="mb-5 text-lg font-semibold text-text-primary">{inProgressSection[lang]}</h2>
+      <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-5">{t(lang, 'certifications.in_progress')}</p>
+      <h2 class="text-xl font-bold text-text-primary mb-5">{inProgressTitle[lang]}</h2>
       <div class="grid gap-4 sm:grid-cols-2">
         {inProgress[lang].map((cert) => (
-          <div class="rounded-lg border border-border/60 border-dashed bg-surface/60 p-5">
+          <div class="rounded-xl border border-dashed border-border-2 bg-surface-2 p-5">
             <div class="mb-3 flex items-start justify-between gap-2">
-              <span class="inline-block rounded border border-muted/30 px-2.5 py-1 font-mono text-sm font-bold text-muted">
+              <span class="inline-block rounded-lg border border-border-2 px-3 py-1 font-mono text-sm font-bold text-muted">
                 {cert.code}
               </span>
-              <span class="rounded-full border border-muted/30 px-2 py-0.5 font-mono text-xs text-muted">
+              <span class="rounded-full border border-border-2 px-2.5 py-0.5 text-xs font-medium text-muted">
                 {t(lang, 'certifications.in_progress')}
               </span>
             </div>
-            <h3 class="mb-3 text-sm font-medium text-muted/80 leading-snug">{cert.name}</h3>
-            <p class="font-mono text-xs text-muted">
-              <span class="text-border">{targetLabel[lang]}:</span> {cert.target}
+            <h3 class="mb-2 text-sm font-semibold text-muted leading-snug">{cert.name}</h3>
+            <p class="text-xs text-muted">
+              <span class="font-medium">{targetLabel[lang]}:</span> {cert.target}
             </p>
           </div>
         ))}

@@ -1,0 +1,227 @@
+---
+// Prototype B — "Light Leadership": clean light theme, editorial, consulting/CTO feel
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype B — Light Leadership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #f8fafc;
+      --surface:  #ffffff;
+      --surface2: #f1f5f9;
+      --accent:   #1d4ed8;
+      --accent-h: #1e40af;
+      --accent2:  #0891b2;
+      --text:     #0f172a;
+      --muted:    #64748b;
+      --border:   #e2e8f0;
+      --border2:  #cbd5e1;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Switcher banner */
+    .switcher { background: var(--text); padding: 8px 24px; display: flex; align-items: center; gap: 16px; font-size: 11px; font-family: monospace; }
+    .switcher span { color: #666; }
+    .switcher a { color: #94a3b8; padding: 3px 10px; border: 1px solid #334155; border-radius: 4px; transition: all .2s; }
+    .switcher a:hover { border-color: #94a3b8; color: #e2e8f0; }
+    .switcher a.current { color: #60a5fa; border-color: #60a5fa; }
+
+    /* Nav */
+    nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--text); }
+    .nav-logo span { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--text); color: #fff; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .nav-cta:hover { background: var(--accent); }
+
+    /* Hero */
+    .hero { max-width: 1100px; margin: 0 auto; padding: 80px 24px 60px; display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: start; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: #dbeafe; color: var(--accent); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 24px; }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: block; }
+    .hero-h1 { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; color: var(--text); margin-bottom: 20px; }
+    .hero-h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 16px; font-weight: 500; color: var(--accent2); margin-bottom: 16px; }
+    .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 36px; max-width: 500px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(29,78,216,.25); transition: all .2s; }
+    .btn-primary:hover { background: var(--accent-h); box-shadow: 0 6px 20px rgba(29,78,216,.35); }
+    .btn-secondary { border: 1.5px solid var(--border2); color: var(--text); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: all .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 20px; }
+    .hero-socials { display: flex; gap: 16px; }
+    .hero-socials a { color: var(--muted); font-size: 13px; font-weight: 500; transition: color .2s; padding: 4px 0; border-bottom: 1px solid transparent; }
+    .hero-socials a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* Right sidebar card */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+    .info-card-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .profile-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .avatar { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .profile-info strong { font-size: 14px; font-weight: 600; color: var(--text); display: block; }
+    .profile-info span { font-size: 12px; color: var(--muted); }
+    .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-key { font-size: 12px; color: var(--muted); }
+    .stat-val { font-size: 13px; font-weight: 600; color: var(--text); }
+    .cert-list { display: flex; flex-direction: column; gap: 8px; }
+    .cert-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--surface2); border-radius: 6px; }
+    .cert-code { font-size: 12px; font-weight: 700; color: var(--accent); }
+    .cert-status { font-size: 11px; color: var(--accent2); background: #cffafe; padding: 2px 8px; border-radius: 3px; }
+
+    /* Stats strip */
+    .stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .stats-inner { max-width: 1100px; margin: 0 auto; padding: 36px 24px; display: grid; grid-template-columns: repeat(4,1fr); text-align: center; gap: 24px; }
+    .strip-value { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 800; color: var(--text); letter-spacing: -1.5px; }
+    .strip-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Sample section */
+    .section { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .section-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+    .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: all .2s; }
+    .card:hover { border-color: var(--border2); box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+    .card-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .card-body { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .card-link { font-size: 12px; font-weight: 600; color: var(--accent); }
+    .featured-card { border-color: var(--accent); border-width: 1.5px; }
+    .featured-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .hero-h1 { font-size: 38px; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Prototype switcher -->
+  <div class="switcher">
+    <span>Design:</span>
+    <a href="/preview/a">A · Navy</a>
+    <a href="/preview/b" class="current">B · Fraunces</a>
+    <a href="/preview/b2">B · Inter</a>
+    <a href="/preview/b3">B · Jakarta</a>
+    <a href="/preview/b4">B · Playfair</a>
+    <a href="/preview/c">C · Dark</a>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Adrian <span>Majail</span></div>
+      <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">Experience</a>
+        <a href="#">Projects</a>
+        <a href="#">Certifications</a>
+        <a href="#" class="nav-cta">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-tag">Available for consulting & speaking</div>
+      <h1 class="hero-h1">I build teams and <em>AI systems</em> that ship.</h1>
+      <p class="hero-sub">.NET Tech Lead & AI Builder — 20 years of experience</p>
+      <div class="divider"></div>
+      <p class="hero-desc">Based in Córdoba, Argentina. Leading AI agent platforms at CloudX — RAG pipelines, MCP integrations, and distributed systems for enterprise clients. Certified Azure Architect, Developer, and Administrator.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">See my work →</a>
+        <a href="#" class="btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="info-card">
+        <p class="info-card-title">Profile</p>
+        <div class="profile-row">
+          <div class="avatar">AM</div>
+          <div class="profile-info">
+            <strong>Adrian Majail</strong>
+            <span>Dev Team Lead @ CloudX</span>
+          </div>
+        </div>
+        <div class="stat-row"><span class="stat-key">Location</span><span class="stat-val">Córdoba, Argentina</span></div>
+        <div class="stat-row"><span class="stat-key">Experience</span><span class="stat-val">20+ years</span></div>
+        <div class="stat-row"><span class="stat-key">Focus</span><span class="stat-val">.NET · Azure · AI Agents</span></div>
+        <div class="stat-row"><span class="stat-key">Teams led</span><span class="stat-val">LATAM · India · NA</span></div>
+      </div>
+      <div class="info-card">
+        <p class="info-card-title">Azure Certifications</p>
+        <div class="cert-list">
+          <div class="cert-item"><span class="cert-code">AZ-305</span><span class="cert-status">Active</span></div>
+          <div class="cert-item"><span class="cert-code">AZ-204</span><span class="cert-status">Active</span></div>
+          <div class="cert-item"><span class="cert-code">AZ-104</span><span class="cert-status">Active</span></div>
+          <div class="cert-item"><span class="cert-code">AI-900</span><span class="cert-status">Active</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div><div class="strip-value">20+</div><div class="strip-label">Years of experience</div></div>
+      <div><div class="strip-value">5+</div><div class="strip-label">Companies</div></div>
+      <div><div class="strip-value">10+</div><div class="strip-label">Countries (teams)</div></div>
+      <div><div class="strip-value">3</div><div class="strip-label">Big Four projects</div></div>
+    </div>
+  </div>
+
+  <!-- Sample projects -->
+  <section class="section">
+    <p class="section-eyebrow">Selected Work</p>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Enterprise platforms across AI, cloud, and distributed systems.</p>
+    <div class="cards">
+      <div class="card featured-card">
+        <div class="featured-badge">Featured</div>
+        <div class="card-eyebrow">AI · CloudX · 2024–2025</div>
+        <div class="card-title">Agent Management Platform</div>
+        <div class="card-body">Enterprise RAG platform for a Big Four client. MCP tools, OpenAPI plugins, real-time SignalR, 5 teams across 4 countries.</div>
+        <span class="card-link">View project →</span>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Enterprise · 2022–2024</div>
+        <div class="card-title">Enterprise Tax Platform</div>
+        <div class="card-body">Large-scale tax management platform. Microservices, Azure, Power BI, SonarQube security hardening.</div>
+        <span class="card-link">View project →</span>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Long-term · 2009–2020</div>
+        <div class="card-title">University Enterprise Platform</div>
+        <div class="card-body">20,000+ users. .NET monolith evolved to Azure-hosted system with CI/CD and payment integration.</div>
+        <span class="card-link">View project →</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
