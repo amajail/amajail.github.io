@@ -1,0 +1,67 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  currentPage?: string;
+}
+
+const {
+  lang,
+  title = 'Adrian Majail — .NET Tech Lead & AI Builder',
+  description = 'Software developer with 20 years of experience. Specialized in .NET, Azure, and AI agent systems.',
+  currentPage,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Alternate language links -->
+    <link
+      rel="alternate"
+      hreflang="en"
+      href={canonicalURL.toString().replace(`/${lang}/`, '/en/')}
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href={canonicalURL.toString().replace(`/${lang}/`, '/es/')}
+    />
+
+    <!-- OG Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-bg text-text-primary">
+    <Nav lang={lang} currentPage={currentPage} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

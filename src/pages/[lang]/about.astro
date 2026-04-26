@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+
+const content = {
+  en: {
+    pageTitle: 'About me',
+    metaDesc: '.NET Tech Lead and AI Builder with 20 years of experience. Specialized in cloud-native systems, AI agents, and team leadership.',
+    intro: 'about',
+    bio: [
+      "I'm a .NET Tech Lead and AI Builder with 20 years of experience in software development. I've worked across the full stack — from on-prem enterprise systems to cloud-native microservices and, more recently, AI agent platforms. My focus is on shipping things that matter: well-architected, production-grade systems that teams can maintain and evolve.",
+      "I lead by doing. I'm most effective in cross-functional environments where technical decisions meet business outcomes — working with developers, QA, BAs, and clients across LATAM, India, and North America. I care about code quality, team growth, and leaving codebases better than I found them.",
+    ],
+    skillsLabel: '// core stack',
+    exploringLabel: 'Currently exploring',
+    exploring: [
+      'AI-200 — Azure AI Cloud Developer Associate',
+      'AI-103 — Azure AI App and Agent Developer Associate',
+      'Multi-agent orchestration patterns',
+      'MCP server design at scale',
+    ],
+    personalLabel: 'Outside of work',
+    personal: [
+      "When I'm not building software, I'm usually doing something physical or reflective. I practice extreme sports to stay grounded, and I do yoga and meditation daily — both help with focus and handling the complexity that comes with leading teams.",
+      "I read a lot: software architecture, leadership, neuroscience, psychology, productivity. I believe that understanding how people think is at least as important as understanding how systems work.",
+    ],
+    valuesLabel: 'Values',
+    values: [
+      { icon: '▸', text: 'Ship with quality' },
+      { icon: '▸', text: 'Lead by example' },
+      { icon: '▸', text: 'Always be learning' },
+      { icon: '▸', text: 'Take care of the team' },
+      { icon: '▸', text: 'Keep it simple' },
+    ],
+  },
+  es: {
+    pageTitle: 'Sobre mí',
+    metaDesc: '.NET Tech Lead y AI Builder con 20 años de experiencia. Especializado en sistemas cloud-native, agentes de IA y liderazgo de equipos.',
+    intro: 'sobre_mí',
+    bio: [
+      'Soy un .NET Tech Lead y AI Builder con 20 años de experiencia en desarrollo de software. Trabajé en todo el stack — desde sistemas enterprise on-prem hasta microservicios cloud-native y, más recientemente, plataformas de agentes de IA. Mi foco es en entregar cosas que importan: sistemas bien arquitectados, production-grade, que los equipos puedan mantener y evolucionar.',
+      'Lidero haciendo. Soy más efectivo en entornos cross-funcionales donde las decisiones técnicas se conectan con los resultados de negocio — trabajando con desarrolladores, QA, BAs y clientes en LATAM, India y Norteamérica. Me importa la calidad del código, el crecimiento del equipo, y dejar las bases de código mejor de como las encontré.',
+    ],
+    skillsLabel: '// stack principal',
+    exploringLabel: 'Explorando actualmente',
+    exploring: [
+      'AI-200 — Azure AI Cloud Developer Associate',
+      'AI-103 — Azure AI App and Agent Developer Associate',
+      'Patrones de orquestación multi-agente',
+      'Diseño de servidores MCP a escala',
+    ],
+    personalLabel: 'Fuera del trabajo',
+    personal: [
+      'Cuando no estoy construyendo software, generalmente estoy haciendo algo físico o reflexivo. Practico deportes extremos para mantenerme activo, y hago yoga y meditación a diario — ambos ayudan con el foco y con manejar la complejidad que viene de liderar equipos.',
+      'Leo bastante: arquitectura de software, liderazgo, neurociencia, psicología, productividad. Creo que entender cómo piensan las personas es al menos tan importante como entender cómo funcionan los sistemas.',
+    ],
+    valuesLabel: 'Valores',
+    values: [
+      { icon: '▸', text: 'Entregar con calidad' },
+      { icon: '▸', text: 'Liderar con el ejemplo' },
+      { icon: '▸', text: 'Aprender siempre' },
+      { icon: '▸', text: 'Cuidar al equipo' },
+      { icon: '▸', text: 'Mantenerlo simple' },
+    ],
+  },
+} as const;
+
+const p = content[lang];
+
+const skills = [
+  '.NET / C#', 'Azure', 'React', 'GraphQL', 'Terraform', 'Docker',
+  'RAG', 'MCP', 'Multi-agent systems', 'Azure OpenAI',
+  'Azure DevOps', 'GitHub Actions', 'SonarQube', 'Datadog',
+  'PostgreSQL', 'Cosmos DB', 'Oracle', 'SQL Server',
+  'SAFe', 'Microservices', 'API Security',
+];
+---
+
+<BaseLayout lang={lang} title={`${p.pageTitle} — Adrian Majail`} description={p.metaDesc} currentPage="about">
+  <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
+
+    <!-- Page heading -->
+    <header class="mb-12">
+      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
+        <span class="text-muted">{'>'}</span> {p.intro}
+      </p>
+      <h1 class="text-3xl font-bold text-text-primary sm:text-4xl">{p.pageTitle}</h1>
+    </header>
+
+    <!-- Bio + Skills grid -->
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 mb-16">
+      <!-- Bio -->
+      <div class="space-y-5">
+        {p.bio.map((para) => (
+          <p class="text-muted leading-relaxed">{para}</p>
+        ))}
+      </div>
+
+      <!-- Skills -->
+      <div>
+        <p class="mb-4 font-mono text-xs text-muted">{p.skillsLabel}</p>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="rounded border border-border bg-surface px-2.5 py-1 font-mono text-xs text-muted hover:border-accent hover:text-accent transition-colors cursor-default">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Currently exploring -->
+    <section class="mb-16 rounded-lg border border-border bg-surface p-6 md:p-8">
+      <p class="mb-4 font-mono text-xs text-accent uppercase tracking-widest">
+        <span class="text-muted">{'>'}</span> {p.exploringLabel.toLowerCase().replace(/ /g, '_')}
+      </p>
+      <h2 class="mb-4 text-lg font-semibold text-text-primary">{p.exploringLabel}</h2>
+      <ul class="space-y-2">
+        {p.exploring.map((item) => (
+          <li class="flex items-start gap-2 font-mono text-sm text-muted">
+            <span class="text-accent-2 shrink-0 mt-0.5">→</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Personal + Values grid -->
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Personal -->
+      <div>
+        <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
+          <span class="text-muted">{'>'}</span> {p.personalLabel.toLowerCase().replace(/ /g, '_')}
+        </p>
+        <h2 class="mb-5 text-xl font-semibold text-text-primary">{p.personalLabel}</h2>
+        <div class="space-y-4">
+          {p.personal.map((para) => (
+            <p class="text-muted leading-relaxed">{para}</p>
+          ))}
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div>
+        <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
+          <span class="text-muted">{'>'}</span> {p.valuesLabel.toLowerCase()}
+        </p>
+        <h2 class="mb-5 text-xl font-semibold text-text-primary">{p.valuesLabel}</h2>
+        <ul class="space-y-3">
+          {p.values.map(({ icon, text }) => (
+            <li class="flex items-center gap-3 rounded border border-border bg-surface px-4 py-3 font-mono text-sm text-text-primary">
+              <span class="text-accent">{icon}</span>
+              {text}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

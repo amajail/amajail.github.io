@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+
+interface Cert {
+  name: string;
+  code: string;
+  issued: string;
+  renew: string | null;
+  credentialId: string | null;
+  noExpiry?: boolean;
+}
+
+const certs: Record<Lang, Cert[]> = {
+  en: [
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dec 2023', renew: 'Dec 2026', credentialId: '75ADDB90F094CD39' },
+    { name: 'Azure Developer Associate', code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: null },
+    { name: 'Azure Administrator Associate', code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: null },
+    { name: 'Azure AI Fundamentals', code: 'AI-900', issued: 'Jan 2025', renew: null, credentialId: '65ACE18EEF332F7C', noExpiry: true },
+  ],
+  es: [
+    { name: 'Azure Solutions Architect Expert', code: 'AZ-305', issued: 'Dic 2023', renew: 'Dic 2026', credentialId: '75ADDB90F094CD39' },
+    { name: 'Azure Developer Associate', code: 'AZ-204', issued: 'Jun 2023', renew: 'Jun 2026', credentialId: null },
+    { name: 'Azure Administrator Associate', code: 'AZ-104', issued: 'Jul 2023', renew: 'Jul 2026', credentialId: null },
+    { name: 'Azure AI Fundamentals', code: 'AI-900', issued: 'Ene 2025', renew: null, credentialId: '65ACE18EEF332F7C', noExpiry: true },
+  ],
+};
+
+const inProgress = {
+  en: [
+    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate', target: 'mid 2026' },
+    { code: 'AI-103', name: 'Azure AI App and Agent Developer Associate', target: '2026' },
+  ],
+  es: [
+    { code: 'AI-200', name: 'Azure AI Cloud Developer Associate', target: 'mediados 2026' },
+    { code: 'AI-103', name: 'Azure AI App and Agent Developer Associate', target: '2026' },
+  ],
+};
+
+const learnStats = [
+  { value: '87', label: { en: 'Badges earned', es: 'Badges obtenidos' } },
+  { value: '18', label: { en: 'Trophies', es: 'Trofeos' } },
+  { value: '10', label: { en: 'Level', es: 'Nivel' } },
+];
+
+const pageTitle = { en: 'Certifications', es: 'Certificaciones' };
+const issuedLabel = { en: 'Issued', es: 'Obtenida' };
+const targetLabel = { en: 'Target', es: 'Objetivo' };
+const noExpiryLabel = { en: 'No expiry', es: 'Sin vencimiento' };
+const msLearnLabel = { en: 'Microsoft Learn Stats', es: 'Stats en Microsoft Learn' };
+const inProgressSection = { en: 'In Progress', es: 'En Progreso' };
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${pageTitle[lang]} — Adrian Majail`}
+  description="Microsoft Azure certifications: AZ-305, AZ-204, AZ-104, AI-900. 87 MS Learn badges."
+  currentPage="certifications"
+>
+  <div class="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-20">
+
+    <!-- Page heading -->
+    <header class="mb-12">
+      <p class="mb-3 font-mono text-xs text-accent uppercase tracking-widest">
+        <span class="text-muted">{'>'}</span> {lang === 'en' ? 'certifications' : 'certificaciones'}
+      </p>
+      <h1 class="text-3xl font-bold text-text-primary sm:text-4xl">{pageTitle[lang]}</h1>
+    </header>
+
+    <!-- Active certs grid -->
+    <section class="mb-14">
+      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
+        // {t(lang, 'certifications.active')}
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {certs[lang].map((cert) => (
+          <div class="rounded-lg border border-border bg-surface p-5 hover:border-accent/40 transition-colors">
+            <!-- Code badge -->
+            <div class="mb-3 flex items-start justify-between gap-2">
+              <span class="inline-block rounded border border-accent/40 bg-accent/10 px-2.5 py-1 font-mono text-sm font-bold text-accent">
+                {cert.code}
+              </span>
+              {cert.noExpiry ? (
+                <span class="rounded-full border border-accent-2/40 bg-accent-2/10 px-2 py-0.5 font-mono text-xs text-accent-2">
+                  {noExpiryLabel[lang]}
+                </span>
+              ) : (
+                <span class="rounded-full border border-accent/30 bg-accent/5 px-2 py-0.5 font-mono text-xs text-accent">
+                  {t(lang, 'certifications.active')}
+                </span>
+              )}
+            </div>
+
+            <!-- Cert name -->
+            <h2 class="mb-3 text-sm font-semibold text-text-primary leading-snug">{cert.name}</h2>
+
+            <!-- Meta -->
+            <dl class="space-y-1 font-mono text-xs text-muted">
+              <div class="flex items-center gap-2">
+                <dt class="text-border">{issuedLabel[lang]}:</dt>
+                <dd>{cert.issued}</dd>
+              </div>
+              {cert.renew && (
+                <div class="flex items-center gap-2">
+                  <dt class="text-border">{t(lang, 'certifications.renew')}:</dt>
+                  <dd class="text-accent-2">{cert.renew}</dd>
+                </div>
+              )}
+              {cert.credentialId && cert.credentialId !== '—' && (
+                <div class="flex items-center gap-2 pt-1">
+                  <dt class="text-border">ID:</dt>
+                  <dd class="text-muted/70">{cert.credentialId}</dd>
+                </div>
+              )}
+            </dl>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- MS Learn Stats -->
+    <section class="mb-14">
+      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
+        // {msLearnLabel[lang]}
+      </p>
+      <div class="rounded-lg border border-border bg-surface p-6">
+        <div class="grid grid-cols-3 gap-6 text-center mb-5">
+          {learnStats.map(({ value, label }) => (
+            <div>
+              <p class="font-mono text-2xl font-bold text-accent">{value}</p>
+              <p class="mt-1 text-xs text-muted">{label[lang]}</p>
+            </div>
+          ))}
+        </div>
+        <div class="border-t border-border pt-4 text-center">
+          <a
+            href="https://learn.microsoft.com/en-us/users/amajail"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 font-mono text-xs text-accent-2 hover:underline"
+          >
+            {lang === 'en' ? 'View MS Learn profile' : 'Ver perfil en MS Learn'}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- In Progress -->
+    <section>
+      <p class="mb-6 font-mono text-xs text-muted uppercase tracking-widest">
+        // {t(lang, 'certifications.in_progress')}
+      </p>
+      <h2 class="mb-5 text-lg font-semibold text-text-primary">{inProgressSection[lang]}</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {inProgress[lang].map((cert) => (
+          <div class="rounded-lg border border-border/60 border-dashed bg-surface/60 p-5">
+            <div class="mb-3 flex items-start justify-between gap-2">
+              <span class="inline-block rounded border border-muted/30 px-2.5 py-1 font-mono text-sm font-bold text-muted">
+                {cert.code}
+              </span>
+              <span class="rounded-full border border-muted/30 px-2 py-0.5 font-mono text-xs text-muted">
+                {t(lang, 'certifications.in_progress')}
+              </span>
+            </div>
+            <h3 class="mb-3 text-sm font-medium text-muted/80 leading-snug">{cert.name}</h3>
+            <p class="font-mono text-xs text-muted">
+              <span class="text-border">{targetLabel[lang]}:</span> {cert.target}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
