@@ -12,6 +12,7 @@ const lang = Astro.params.lang as Lang;
 interface TimelineEntry {
   title: string;
   company: string;
+  companyUrl?: string;
   period: string;
   location: string;
   current?: boolean;
@@ -23,25 +24,25 @@ interface TimelineEntry {
 const timeline: Record<Lang, TimelineEntry[]> = {
   en: [
     {
-      title: 'Development Team Lead', company: 'CloudX',
+      title: 'Development Team Lead', company: 'CloudX', companyUrl: 'https://www.cloudx.com',
       period: `Jan 2025 – ${t(lang, 'experience.present')}`, location: 'Remote · Argentina', current: true,
       description: 'Built an Agent Management Platform for a Big Four company — designed for RAG-based agents with MCP and OpenAPI plugin consumption. Led 5 cross-functional teams across India, Colombia, Paraguay, and Argentina.',
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead', company: 'CloudX',
+      title: 'Technical Lead', company: 'CloudX', companyUrl: 'https://www.cloudx.com',
       period: 'Jan 2024 – Dec 2024', location: 'Remote',
       description: 'Led a team of 7 (2 FE, 3 BE, 1 BA, 2 QA) across Colombia and Argentina. Delivered a microservices platform to production with full documentation and client training.',
       stack: ['React', 'GraphQL', 'NSwag', 'Azure REST APIs', 'Functions', 'Service Bus', 'AKS', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead', company: 'Cognizant Softvision',
+      title: 'Technical Lead', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Jul 2023 – Jan 2024', location: 'Remote',
       description: 'Big Four — taxes domain. Multicultural team across India, Mexico, and Argentina. SAFe PI planning · SonarQube security hardening · code reviews.',
       stack: ['REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI'],
     },
     {
-      title: 'Technical Lead', company: 'Cognizant Softvision',
+      title: 'Technical Lead', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Sep 2022 – Jul 2023', location: 'Buenos Aires',
       description: 'End-to-end delivery: from estimation and architecture to production deployment. Implemented Microsoft Bot as an AI service. Led developers, DevOps, and QA across Mexico and Argentina.',
       highlights: [
@@ -51,7 +52,7 @@ const timeline: Record<Lang, TimelineEntry[]> = {
       stack: ['.NET', 'Azure', 'Microservices', 'Microsoft Bot', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead (Internal Project)', company: 'Cognizant Softvision',
+      title: 'Technical Lead (Internal Project)', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Jun 2022 – Aug 2022', location: 'Remote',
       description: 'Internal project. Migrated .NET Core 2.2 → 6. First hands-on experience with Docker and AWS.',
       stack: ['.NET 6', 'Docker', 'AWS'],
@@ -71,25 +72,25 @@ const timeline: Record<Lang, TimelineEntry[]> = {
   ],
   es: [
     {
-      title: 'Development Team Lead', company: 'CloudX',
+      title: 'Development Team Lead', company: 'CloudX', companyUrl: 'https://www.cloudx.com',
       period: `Ene 2025 – ${t(lang, 'experience.present')}`, location: 'Remoto · Argentina', current: true,
       description: 'Construí una plataforma de gestión de agentes para una empresa Big Four — diseñada para agentes RAG con consumo de herramientas MCP y plugins OpenAPI. Lideré 5 equipos cross-funcionales en India, Colombia, Paraguay y Argentina.',
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead', company: 'CloudX',
+      title: 'Technical Lead', company: 'CloudX', companyUrl: 'https://www.cloudx.com',
       period: 'Ene 2024 – Dic 2024', location: 'Remoto',
       description: 'Lideré un equipo de 7 personas (2 FE, 3 BE, 1 BA, 2 QA) en Colombia y Argentina. Entregué una plataforma basada en microservicios a producción con documentación completa y capacitación al cliente.',
       stack: ['React', 'GraphQL', 'NSwag', 'Azure REST APIs', 'Functions', 'Service Bus', 'AKS', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead', company: 'Cognizant Softvision',
+      title: 'Technical Lead', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Jul 2023 – Ene 2024', location: 'Remoto',
       description: 'Big Four — dominio de impuestos. Equipo multicultural en India, México y Argentina. SAFe PI planning · hardening de seguridad con SonarQube · code reviews.',
       stack: ['REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI'],
     },
     {
-      title: 'Technical Lead', company: 'Cognizant Softvision',
+      title: 'Technical Lead', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Sep 2022 – Jul 2023', location: 'Buenos Aires',
       description: 'Entrega end-to-end: desde estimaciones y arquitectura hasta deploy a producción. Implementé Microsoft Bot como servicio de IA. Lideré desarrolladores, DevOps y QA en México y Argentina.',
       highlights: [
@@ -99,7 +100,7 @@ const timeline: Record<Lang, TimelineEntry[]> = {
       stack: ['.NET', 'Azure', 'Microservicios', 'Microsoft Bot', 'Microsoft Entra'],
     },
     {
-      title: 'Technical Lead (Proyecto Interno)', company: 'Cognizant Softvision',
+      title: 'Technical Lead (Proyecto Interno)', company: 'Cognizant Softvision', companyUrl: 'https://www.cognizant.com',
       period: 'Jun 2022 – Ago 2022', location: 'Remoto',
       description: 'Proyecto interno. Migración de .NET Core 2.2 → 6. Primer contacto con Docker y AWS.',
       stack: ['.NET 6', 'Docker', 'AWS'],
@@ -177,7 +178,10 @@ const entries   = timeline[lang];
               <div>
                 <h2 class="text-sm font-bold text-text-primary">
                   {entry.title}
-                  <span class="font-normal text-muted"> · {entry.company}</span>
+                  <span class="font-normal text-muted"> · {entry.companyUrl
+                    ? <a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">{entry.company}</a>
+                    : entry.company
+                  }</span>
                 </h2>
                 <p class="mt-0.5 font-mono text-xs text-muted">{entry.period} · {entry.location}</p>
               </div>
