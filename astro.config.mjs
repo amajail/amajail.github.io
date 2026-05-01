@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://amajail.github.io',
+  site: 'https://adrimajail.com',
   output: 'static',
   integrations: [tailwind()],
   i18n: {
