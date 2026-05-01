@@ -1,18 +1,16 @@
 ---
-// Root redirect: client-side to browser language, fallback to /en/
 ---
 
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/en/" />
+    <title>Adrian Majail</title>
     <script is:inline>
       const preferred = navigator.language || navigator.languages?.[0] || 'en';
       const lang = preferred.toLowerCase().startsWith('es') ? 'es' : 'en';
       window.location.replace('/' + lang + '/');
     </script>
-    <title>Adrian Majail</title>
   </head>
   <body></body>
 </html>
