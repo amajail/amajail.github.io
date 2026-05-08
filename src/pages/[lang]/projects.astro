@@ -8,9 +8,11 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 
+interface ClientSegment { text: string; url?: string }
+
 interface Project {
   title: string;
-  client: string;
+  client: ClientSegment[];
   period: string;
   description: string;
   highlights: string[];
@@ -22,7 +24,7 @@ interface Project {
 const projects: Record<Lang, Project[]> = {
   en: [
     {
-      title: 'Agent Management Platform', client: 'Big Four (confidential) · CloudX', period: '2024–2025',
+      title: 'Agent Management Platform', client: [{ text: 'Big Four (confidential)' }, { text: 'CloudX', url: 'https://www.cloudx.com' }], period: '2024–2025',
       featured: true, badgeLabel: 'Featured',
       description: 'An enterprise platform for managing AI agents that perform Retrieval-Augmented Generation (RAG), consuming MCP tools and OpenAPI plugins. Built to scale across multiple business units with full enterprise integration.',
       highlights: [
@@ -35,7 +37,7 @@ const projects: Record<Lang, Project[]> = {
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'GitHub Actions', 'Microsoft Entra'],
     },
     {
-      title: 'Enterprise Tax Platform', client: 'Big Four (confidential) · Cognizant Softvision', period: '2022–2024',
+      title: 'Enterprise Tax Platform', client: [{ text: 'Big Four (confidential)' }, { text: 'Cognizant Softvision', url: 'https://www.cognizant.com' }], period: '2022–2024',
       description: 'A large-scale tax management platform for a global firm. Microservices architecture with full Azure integration, Power BI reporting, and security hardening via SonarQube.',
       highlights: [
         'SAFe PI planning across multicultural teams',
@@ -46,7 +48,7 @@ const projects: Record<Lang, Project[]> = {
       stack: ['.NET', 'REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI', 'SonarQube'],
     },
     {
-      title: 'University Enterprise Platform', client: 'UADE', period: '2009–2020',
+      title: 'University Enterprise Platform', client: [{ text: 'UADE', url: 'https://www.uade.edu.ar' }], period: '2009–2020',
       description: 'Long-running platform serving 20,000+ users. Evolved from a .NET monolith to an Azure-hosted, scalable system with CI/CD automation, payment integration, and high-concurrency handling.',
       highlights: [
         'Scaled to handle large concurrent user loads on Azure',
@@ -59,7 +61,7 @@ const projects: Record<Lang, Project[]> = {
   ],
   es: [
     {
-      title: 'Agent Management Platform', client: 'Big Four (confidencial) · CloudX', period: '2024–2025',
+      title: 'Agent Management Platform', client: [{ text: 'Big Four (confidencial)' }, { text: 'CloudX', url: 'https://www.cloudx.com' }], period: '2024–2025',
       featured: true, badgeLabel: 'Destacado',
       description: 'Plataforma enterprise para gestión de agentes de IA que realizan Retrieval-Augmented Generation (RAG), consumiendo herramientas MCP y plugins OpenAPI. Construida para escalar en múltiples unidades de negocio con integración enterprise completa.',
       highlights: [
@@ -72,7 +74,7 @@ const projects: Record<Lang, Project[]> = {
       stack: ['React', 'PostgreSQL', 'Azure Cosmos DB', 'AKS', 'Azure Functions', 'Service Bus', 'App Configuration', 'SignalR', 'Terraform', 'GitHub Actions', 'Microsoft Entra'],
     },
     {
-      title: 'Plataforma de Impuestos Enterprise', client: 'Big Four (confidencial) · Cognizant Softvision', period: '2022–2024',
+      title: 'Plataforma de Impuestos Enterprise', client: [{ text: 'Big Four (confidencial)' }, { text: 'Cognizant Softvision', url: 'https://www.cognizant.com' }], period: '2022–2024',
       description: 'Plataforma de gestión tributaria a gran escala para una empresa global. Arquitectura de microservicios con integración completa en Azure, reportes Power BI y hardening de seguridad con SonarQube.',
       highlights: [
         'SAFe PI planning en equipos multiculturales',
@@ -83,7 +85,7 @@ const projects: Record<Lang, Project[]> = {
       stack: ['.NET', 'REST APIs', 'Azure Functions', 'Service Bus', 'Redis', 'SQL', 'Power BI', 'SonarQube'],
     },
     {
-      title: 'Plataforma Enterprise Universitaria', client: 'UADE', period: '2009–2020',
+      title: 'Plataforma Enterprise Universitaria', client: [{ text: 'UADE', url: 'https://www.uade.edu.ar' }], period: '2009–2020',
       description: 'Plataforma de larga duración para más de 20.000 usuarios. Evolucionó de un monolito .NET a un sistema escalable en Azure con CI/CD automatizado, integración de pagos y manejo de alta concurrencia.',
       highlights: [
         'Escalado para alta concurrencia en Azure',
@@ -131,7 +133,16 @@ const hlLabel     = { en: 'Highlights',  es: 'Destacados' };
           <div class="mb-4">
             <h2 class="text-xl font-bold text-text-primary mb-1">{project.title}</h2>
             <p class="text-xs font-medium text-muted">
-              <span class="text-accent-2">{clientLabel[lang]}:</span> {project.client} · {project.period}
+              <span class="text-accent-cyan">{clientLabel[lang]}:</span>{' '}
+              {project.client.map((seg, i) => (
+                <>
+                  {i > 0 && ' · '}
+                  {seg.url
+                    ? <a href={seg.url} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">{seg.text}</a>
+                    : seg.text
+                  }
+                </>
+              ))} · {project.period}
             </p>
           </div>
 

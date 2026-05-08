@@ -1,32 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    @apply bg-bg text-text-primary font-body min-h-screen;
-  }
-
-  ::selection {
-    @apply bg-accent text-white;
-  }
-
-  :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent;
-  }
-}
-
-@layer components {
-  .eyebrow {
-    @apply text-xs font-semibold text-accent uppercase tracking-widest;
-  }
-  .accent-line {
-    @apply block w-10 h-0.5 bg-accent mt-1 mb-5;
-  }
-}
+@import "@amajail/ui/fonts";
+@import "tailwindcss";
+@import "@amajail/ui/styles";
