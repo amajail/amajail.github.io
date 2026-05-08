@@ -86,7 +86,7 @@ const inProgressTitle = { en: 'In Progress',  es: 'En Progreso' };
                 {cert.code}
               </span>
               {cert.noExpiry ? (
-                <span class="rounded-full border border-accent-2/30 bg-cyan-50 px-2.5 py-0.5 text-xs font-semibold text-accent-2">
+                <span class="rounded-full border border-accent-cyan/30 bg-cyan-50 px-2.5 py-0.5 text-xs font-semibold text-accent-cyan">
                   {noExpiryLabel[lang]}
                 </span>
               ) : (
@@ -106,7 +106,7 @@ const inProgressTitle = { en: 'In Progress',  es: 'En Progreso' };
               {cert.renew && (
                 <div class="flex items-center gap-2">
                   <dt class="text-border-2">{t(lang, 'certifications.renew')}:</dt>
-                  <dd class="font-medium text-accent-2">{cert.renew}</dd>
+                  <dd class="font-medium text-accent-cyan">{cert.renew}</dd>
                 </div>
               )}
               <div class="flex items-center gap-2">
